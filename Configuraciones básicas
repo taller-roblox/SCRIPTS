@@ -1,0 +1,84 @@
+--[[
+Script de configuración del juego
+Este script tiene variables que controlan los
+aspectos visibles del mundo y del jugador en Roblox.
+Todos los cambios se aplican automáticamente cuando inicia el juego.
+--]]
+
+------------------------------------------------
+-- VARIABLES MODIFICABLES ----------------------
+------------------------------------------------
+
+-- Color del piso (Baseplate)
+ColorPiso = Color3.fromRGB(43, 188, 255) -- Verde
+
+-- Gravedad del mundo (valor normal = 196.2)
+Gravedad = 196.2
+
+-- Brillo del ambiente
+BrilloAmbiente = 15
+
+-- Velocidad de caminar del jugador
+VelocidadJugador = 16 -- normal = 16
+
+-- Altura del salto del jugador (50 = normal)
+AlturaSalto = 500
+
+-- Hora del día (0 a 24) → 0 o 24 = medianoche, 12 = mediodía
+HoraDelDia = 13 -- 14 = 2 de la tarde
+
+-- Niebla (0 = sin niebla, 1 = niebla muy densa)
+DensidadNiebla = 0.8
+
+-- Salud máxima del jugador (100 = normal)
+SaludJugador = 200
+
+------------------------------------------------
+-- APLICAR CONFIGURACIONES AL INICIAR ----------
+------------------------------------------------
+
+-- Configurar Baseplate
+local baseplate = workspace:FindFirstChild("Baseplate")
+if baseplate then
+	baseplate.Color = ColorPiso
+end
+
+-- Configurar gravedad
+workspace.Gravity = Gravedad
+
+-- Configurar iluminación
+local Lighting = game:GetService("Lighting")
+Lighting.Brightness = BrilloAmbiente
+Lighting.ClockTime = HoraDelDia
+
+-- Niebla con Atmosphere
+local atmosfera = Lighting:FindFirstChildOfClass("Atmosphere")
+if not atmosfera then
+	atmosfera = Instance.new("Atmosphere")
+	atmosfera.Parent = Lighting
+end
+atmosfera.Decay = Color3.new(0.5, 0.5, 0.5)
+atmosfera.Density = DensidadNiebla
+
+-- Función para aplicar configuraciones al jugador
+local function configurarJugador(character)
+	local humanoid = character:WaitForChild("Humanoid")
+	humanoid.WalkSpeed = VelocidadJugador
+	humanoid.JumpHeight = AlturaSalto
+	humanoid.MaxHealth = SaludJugador
+	humanoid.Health = SaludJugador
+end
+
+-- Aplicar a jugadores que ya están en el juego
+for _, player in pairs(game.Players:GetPlayers()) do
+	if player.Character then
+		configurarJugador(player.Character)
+	end
+end
+
+-- Aplicar a jugadores nuevos
+game.Players.PlayerAdded:Connect(function(player)
+	player.CharacterAdded:Connect(function(character)
+		configurarJugador(character)
+	end)
+end)
