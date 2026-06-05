@@ -1,0 +1,83 @@
+local moneda = script.Parent
+
+-- VARIABLES (¡Acá pueden cambiar los valores para probar!)
+local velocidadGiroX = 8
+local velocidadGiroY = 5  -- Gira en el eje vertical (como un trompo)
+local velocidadGiroZ = 0  -- Gira de costado (como una rueda)
+local aumentoDeSalto = 15 -- Cuánta fuerza de salto suma cada moneda
+
+-- 1. Función para cuando alguien toca la moneda
+local function recogerMoneda(parteQueToco)
+	local personaje = parteQueToco.Parent
+	local humanoide = personaje:FindFirstChild("Humanoid")
+
+	if humanoide then
+		-- Primero, le avisamos al juego que vamos a modificar el salto manualmente
+		humanoide.UseJumpPower = true
+
+		-- LÓGICA DE SUMA: El salto nuevo es igual al salto que ya tenía + el aumento
+		humanoide.JumpPower = humanoide.JumpPower + aumentoDeSalto
+
+		-- Mensaje en la consola para comprobar la matemática
+		print("¡Agarramos una moneda! La fuerza de salto ahora es de:", humanoide.JumpPower)
+
+		-- Destruimos la moneda para que desaparezca
+		moneda:Destroy() 
+	end
+end
+
+-- Conectamos el sensor de toque
+moneda.Touched:Connect(recogerMoneda)
+
+-- 2. Bucle infinito para hacerla girar
+while true do
+	-- Si la moneda ya fue destruida, frenamos el bucle para que no dé error
+	if not moneda.Parent then
+		break 
+	end
+
+	-- Aplicamos las tres variables en el Vector3 para modificar la rotación completa
+	moneda.Orientation = moneda.Orientation + Vector3.new(velocidadGiroX, velocidadGiroY, velocidadGiroZ)
+
+	local moneda = script.Parent
+
+	-- ⚙️ VARIABLES PARA LOS ALUMNOS (¡Acá pueden cambiar los valores para probar!)
+	local velocidadGiroX = 0
+	local velocidadGiroY = 5  -- Gira en el eje vertical (como un trompo)
+	local velocidadGiroZ = 0  -- Gira de costado (como una rueda)
+	local aumentoDeSalto = 15 -- Cuánta fuerza de salto suma cada moneda
+
+	-- 1. Función para cuando alguien toca la moneda
+	local function recogerMoneda(parteQueToco)
+		local personaje = parteQueToco.Parent
+		local humanoide = personaje:FindFirstChild("Humanoid")
+
+		if humanoide then
+			-- Primero, le avisamos al juego que vamos a modificar el salto manualmente
+			humanoide.UseJumpPower = true
+
+			-- LÓGICA DE SUMA: El salto nuevo es igual al salto que ya tenía + el aumento
+			humanoide.JumpPower = humanoide.JumpPower + aumentoDeSalto
+
+			-- Destruimos la moneda para que desaparezca
+			moneda:Destroy() 
+		end
+	end
+
+	-- Conectamos el sensor de toque
+	moneda.Touched:Connect(recogerMoneda)
+
+	-- 2. Bucle infinito para hacerla girar
+	while true do
+		-- Si la moneda ya fue destruida, frenamos el bucle para que no dé error
+		if not moneda.Parent then
+			break 
+		end
+
+		-- Aplicamos las tres variables en el Vector3 para modificar la rotación completa
+		moneda.Orientation = moneda.Orientation + Vector3.new(velocidadGiroX, velocidadGiroY, velocidadGiroZ)
+
+		-- Pausa chiquita para que el juego corra fluido
+		task.wait(0.05) 
+	end
+end
