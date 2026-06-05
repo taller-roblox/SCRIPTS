@@ -41,12 +41,6 @@ while true do
 
 	local moneda = script.Parent
 
-	-- ⚙️ VARIABLES PARA LOS ALUMNOS (¡Acá pueden cambiar los valores para probar!)
-	local velocidadGiroX = 0
-	local velocidadGiroY = 5  -- Gira en el eje vertical (como un trompo)
-	local velocidadGiroZ = 0  -- Gira de costado (como una rueda)
-	local aumentoDeSalto = 15 -- Cuánta fuerza de salto suma cada moneda
-
 	-- 1. Función para cuando alguien toca la moneda
 	local function recogerMoneda(parteQueToco)
 		local personaje = parteQueToco.Parent
