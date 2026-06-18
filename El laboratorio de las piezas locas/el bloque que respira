@@ -1,0 +1,26 @@
+-- Guardamos la pieza en una variable
+local pieza = script.Parent
+
+-- La anclamos para que no se caiga
+pieza.Anchored = true
+
+-- Bucle infinito para que el movimiento no se detenga
+while true do
+	-- Subir la pieza
+	for paso = 1, 15 do
+		pieza.Size = pieza.Size + Vector3.new(1, 1, 1)
+		task.wait(0.1)
+	end
+	-- Bajar la pieza
+	for paso = 1, 15 do
+		pieza.Size = pieza.Size - Vector3.new(1, 1, 1)
+		task.wait(0.1)
+	end
+end
+
+-- ==========================================
+-- 🎯 DESAFÍO: LA PIEZA GIGANTE
+-- ==========================================
+-- 1. En lugar de sumar Vector3.new(1, 1, 1), probá sumar Vector3.new(2, 0, 0).
+--    ¿La pieza crece para todos lados o se estira como un fideo?
+-- 2. Cambiá el número 15 por 50 para ver qué tan grande puede llegar a ser.
