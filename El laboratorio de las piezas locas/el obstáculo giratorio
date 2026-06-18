@@ -1,0 +1,18 @@
+-- Guardamos la pieza en una variable
+local pieza = script.Parent
+pieza.Anchored = true;
+
+-- Bucle infinito para que el movimiento no se detenga
+while true do
+	-- Subir la pieza
+	pieza.Orientation = pieza.Orientation + Vector3.new(0, 5, 0)
+	task.wait(0.05) 
+end
+
+-- ==========================================
+-- 🎯 DESAFÍO: EL TROMPO LOCO
+-- ==========================================
+-- 1. El script suma 5 grados en el eje Y (el número del medio). 
+--    ¿Qué pasa si le sumás 5 al eje X (el primer número) o al Z (el último)?
+-- 2. ¿Cómo harías para que gire hacia el otro lado? 
+--    (Pista: probá usando un número negativo como -5)
