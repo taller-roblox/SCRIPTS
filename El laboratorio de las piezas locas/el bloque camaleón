@@ -1,0 +1,14 @@
+local pieza = script.Parent
+
+--Bucle infinito para cambiar el color
+while true do
+	--Cambia el color de forma aleatoria
+	pieza.BrickColor = BrickColor.Random()
+	task.wait(0.5)
+end
+
+-- ==========================================
+-- 🎯 DESAFÍO: FIESTA ELECTRÓNICA
+-- ==========================================
+-- 1. El bloque cambia de color cada medio segundo (0.5). 
+--    ¿Qué pasa si ponés task.wait(0.05)? ¡Cuidado con los ojos!
