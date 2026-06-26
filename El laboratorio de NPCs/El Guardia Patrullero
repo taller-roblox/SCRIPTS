@@ -1,0 +1,24 @@
+local npc = script.Parent
+local humanoide = npc:WaitForChild("Humanoid")
+local raiz = npc:WaitForChild("HumanoidRootPart")
+
+-- Guardamos el punto donde nació el NPC como su "base"
+local puntoBase = raiz.Position
+
+while true do
+    -- Caminar 15 pasos a la derecha
+    humanoide:MoveTo(puntoBase + Vector3.new(15, 0, 0))
+    humanoide.MoveToFinished:Wait() -- El script se pausa acá hasta que llega
+    task.wait(1) -- Hace guardia 1 segundo parado
+
+    -- Volver 15 pasos a la izquierda
+    humanoide:MoveTo(puntoBase - Vector3.new(15, 0, 0))
+    humanoide.MoveToFinished:Wait()
+    task.wait(1)
+end
+
+-- ==========================================
+-- 🎮 DESAFÍO: EL GUARDIA DEL CASTILLO
+-- ==========================================
+-- 1. El guardia camina 15 pasos para cada lado. ¿Cómo harías para que su recorrido de patrulla sea de 40 pasos?
+-- 2. ¿Qué pasa si borrás las dos líneas que dicen "MoveToFinished:Wait()"? ¡Probalo para ver cómo se marea el código!
