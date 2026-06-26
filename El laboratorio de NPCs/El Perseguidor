@@ -1,0 +1,31 @@
+local npc = script.Parent
+local humanoide = npc:WaitForChild("Humanoid")
+
+while true do
+    -- Buscamos la lista de todos los jugadores conectados
+    local jugadores = game.Players:GetPlayers()
+    
+    -- Si hay por lo menos un jugador jugando...
+    if #jugadores > 0 then
+        local jugadorObjetivo = jugadores[1]
+        local personajeJugador = jugadorObjetivo.Character
+        
+        if personajeJugador and personajeJugador:FindFirstChild("HumanoidRootPart") then
+            -- Tomamos la posición de la raíz (el centro del cuerpo) del jugador
+            local posicionJugador = personajeJugador.HumanoidRootPart.Position
+            
+            -- Le ordenamos al NPC caminar hacia ahí
+            humanoide:MoveTo(posicionJugador)
+        end
+    end
+    
+    task.wait(0.5) -- Piensa cada medio segundo hacia dónde recalcular
+end
+
+-- ==========================================
+-- 🎮 DESAFÍO: EL ZOMBI HAMBRIENTO
+-- ==========================================
+-- 1. El NPC recalcula tu posición cada 0.5 segundos. ¿Qué pasa si pones task.wait(3)? 
+--    ¿Se vuelve más tonto y fácil de esquivar?
+-- 2. Entrá a las propiedades del Humanoid del NPC y buscá "WalkSpeed" (viene en 16). 
+--    Ponele 8 para que sea un zombi lento, o 25 para un infectado furioso.
