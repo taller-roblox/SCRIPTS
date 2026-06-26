@@ -1,0 +1,25 @@
+local npc = script.Parent
+local humanoide = npc:WaitForChild("Humanoid")
+local raiz = npc:WaitForChild("HumanoidRootPart")
+
+local centro = raiz.Position
+
+while true do
+    humanoide:MoveTo(centro + Vector3.new(12, 0, 0)) -- Norte
+    humanoide.MoveToFinished:Wait()
+
+    humanoide:MoveTo(centro + Vector3.new(0, 0, 12)) -- Este
+    humanoide.MoveToFinished:Wait()
+
+    humanoide:MoveTo(centro - Vector3.new(12, 0, 0)) -- Sur
+    humanoide.MoveToFinished:Wait()
+
+    humanoide:MoveTo(centro - Vector3.new(0, 0, 12)) -- Oeste
+    humanoide.MoveToFinished:Wait()
+end
+
+-- ==========================================
+-- 🎮 DESAFÍO: EL MARATONISTA MAREADO
+-- ==========================================
+-- 1. El NPC no hace pausas en las esquinas, gira de una. ¿Te animás a agregar un task.wait(0.5) abajo de cada MoveToFinished?
+-- 2. Si cambiás todos los números 12 por un 5, ¿hace un círculo gigante o da vueltas en una baldosa?
