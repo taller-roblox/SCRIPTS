@@ -1,0 +1,24 @@
+local npc = script.Parent
+local humanoide = npc:WaitForChild("Humanoid")
+local raiz = npc:WaitForChild("HumanoidRootPart")
+
+local origen = raiz.Position
+
+while true do
+    -- Inventamos un número al azar entre -25 y 25 para los ejes X y Z
+    local azarX = math.random(-25, 25)
+    local azarZ = math.random(-25, 25)
+
+    local destinoAleatorio = origen + Vector3.new(azarX, 0, azarZ)
+
+    humanoide:MoveTo(destinoAleatorio)
+    humanoide.MoveToFinished:Wait()
+
+    task.wait(2) -- Descansa 2 segundos mirando la nada
+end
+
+-- ==========================================
+-- 🎮 DESAFÍO: EL ALDEANO DISTRAÍDO
+-- ==========================================
+-- 1. El rango de paseo es entre -25 y 25. Si ponés math.random(-100, 100), ¿el aldeano se queda en el pueblo o se va a explorar el bosque?
+-- 2. Cambiá el descanso de 2 segundos por un math.random(1, 5). ¡Ahora a veces descansa un segundo y a veces se queda dormido cinco!
