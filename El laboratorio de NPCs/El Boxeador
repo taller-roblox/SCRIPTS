@@ -1,0 +1,24 @@
+local npc = script.Parent
+
+local function darGolpe(parteTocada)
+    local personajeJugador = parteTocada.Parent
+    local humanoideJugador = personajeJugador:FindFirstChild("Humanoid")
+    
+    -- Si tocamos a un humanoide Y NO es el propio NPC tocándose a sí mismo...
+    if humanoideJugador and personajeJugador ~= npc then
+        humanoideJugador.Health = humanoideJugador.Health - 10
+    end
+end
+
+-- Le pegamos la función "darGolpe" a cada parte sólida del muñeco
+for indice, parte in pairs(npc:GetChildren()) do
+    if parte:IsA("BasePart") then
+        parte.Touched:Connect(darGolpe)
+    end
+end
+
+-- ==========================================
+-- 🎮 DESAFÍO: EL GUARDAESPALDAS 
+-- ==========================================
+-- 1. Cada piña del NPC te saca 10 de vida. ¿Cómo harías para que sea un "Jefe Final" que te quite 45 de vida por contacto?
+-- 2. Combinación letal: ¿Qué creés que pasaría si metés ESTE script dentro del NPC que usa el Script 1 (El Perseguidor)? ¡Crea un monstruo!
