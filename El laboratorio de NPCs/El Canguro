@@ -1,0 +1,13 @@
+local npc = script.Parent
+local humanoide = npc:WaitForChild("Humanoid")
+
+while true do
+    humanoide.Jump = true
+    task.wait(1) -- Salta una vez por segundo
+end
+
+-- ==========================================
+-- 🎮 DESAFÍO: EL CANGURO HIPERACTIVO
+-- ==========================================
+-- 1. El tiempo de espera es de 1 segundo. ¿Qué pasa si le ponés task.wait(0.2)? ¿Toca el piso antes de volver a saltar?
+-- 2. (Desafío de investigación): Entrá a las propiedades del Humanoid y buscá "JumpPower" o "JumpHeight". Ponele el triple del valor que trae.
